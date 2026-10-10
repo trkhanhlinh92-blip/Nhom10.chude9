@@ -1,0 +1,56 @@
+void QuanLyTaiKhoan::giamDan() {
+    if (n <= 0) {
+        cout << "Danh sach dang trong!\n";
+        return;
+    }
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (ds[i].getSodu() < ds[j].getSodu()) {
+                TaiKhoan temp = ds[i];
+                ds[i] = ds[j];
+                ds[j] = temp;
+            }
+        }
+    }
+    cout << "=> Da sap xep danh sach theo so du giam dan thanh cong.\n";
+}
+
+void QuanLyTaiKhoan::boSung(int vitri) {
+    if (n >= 200) {
+        cout << "Danh sach da day (toi da 200), khong the bo sung!\n";
+        return;
+    }
+    if (vitri < 0 || vitri > n) {
+        cout << "Vi tri bo sung khong hop le!\n";
+        return;
+    }
+
+    TaiKhoan tkm;
+    cout << "Nhap thong tin tai khoan can bo sung:\n";
+    tkm.nhap();
+
+    for (int i = n; i > vitri; i--) {
+        ds[i] = ds[i - 1];
+    }
+    ds[vitri] = tkm;
+    n++;
+    cout << "=> Da bo sung tai khoan vao vi tri " << vitri << " thanh cong.\n";
+}
+
+void QuanLyTaiKhoan::xoa(int vitri) {
+    if (n <= 0) {
+        cout << "Danh sach dang trong, khong co gi de xoa!\n";
+        return;
+    }
+    if (vitri < 0 || vitri >= n) {
+        cout << "Vi tri xoa khong hop le!\n";
+        return;
+    }
+
+    for (int i = vitri; i < n - 1; i++) {
+        ds[i] = ds[i + 1];
+    }
+    n--;
+    cout << "=> Da xoa tai khoan tai vi tri " << vitri << " thanh cong.\n";
+}
+
